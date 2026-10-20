@@ -2,43 +2,69 @@
 
 檢查日期：2026-10-07。
 
-這組權重用於 LIBERO 模擬環境，尚未完成 WidowX AI Follower 的部署驗證。
-目前相機客戶端不能直接使用這組權重的預設 LIBERO 輸入介面。
+## 結論
 
-## 已確認的差異
+- 不能直接用在 WidowX
+	- 為 LIBERO 模擬訓練
+	- 未做實體部署驗證
+- 不相容目前相機客戶端
+	- 輸入介面不同
+- 沒有零樣本部署證據
 
-| 項目 | 目前實體設定 | RLinf LIBERO 介面 |
-| --- | --- | --- |
-| 相機 | 一台 D435i 固定全景相機 | 全景 + 腕部影像 |
-| 狀態 | 6 個關節角度 + 1 個夾爪位置，7 維 | 末端 xyz + angle-axis 旋轉 + 兩個夾指位置，8 維 |
-| 動作 | SDK 可接受關節角度等命令 | 模擬環境的動作定義；不能把 7 維輸出直接當成 6 個關節目標 + 夾爪位置 |
-| 輸入欄位 | `state`, `images.cam_high`, `prompt` | `observation/state`, `observation/image`, `observation/wrist_image`, `prompt` |
+## 介面差異
 
-LIBERO 的環境程式在 `_extract_image_and_state` 使用
-`robot0_eef_pos`、`quat2axisangle(robot0_eef_quat)`、`robot0_gripper_qpos`
-組成狀態。RLinf 的資料轉換程式說明原始 LIBERO 動作已是 delta actions。
-不能僅修改欄位名稱、補零或看到輸出也是 7 維就假設相容。
+| 項目 | 目前實體設定 | RLinf LIBERO |
+|---|---|---|
+| 相機 | 一台 D435i 固定全景 | 全景＋腕部 |
+| 狀態 | 6 關節角＋夾爪位置，7 維 | 末端 xyz＋angle-axis＋兩夾指，8 維 |
+| 動作 | SDK 關節角等命令 | 模擬環境定義，delta actions |
+| 輸入欄位 | `state`<br>`images.cam_high`<br>`prompt` | `observation/state`<br>`observation/image`<br>`observation/wrist_image`<br>`prompt` |
 
-Hugging Face 檔案清單列出：
+**證據：**
 
-- `model.safetensors`：7,473,091,464 bytes。
-- `optimizer.pt`：13,473,854,709 bytes，推論不需要此訓練 optimizer 檔。
-- 正規化資料：`physical-intelligence/libero/norm_stats.json`。
+- LIBERO 狀態的組成
+	- 程式 `_extract_image_and_state`
+	- `robot0_eef_pos`
+	- `quat2axisangle(robot0_eef_quat)`
+	- `robot0_gripper_qpos`
+- RLinf 資料轉換說明
+	- 原始動作已是 delta
+- 輸出雖然也是 7 維
+	- 不等於 6 關節＋夾爪
+	- 改欄位名、補零都無效
 
-這個資料布局與 upstream OpenPI 預設 checkpoint assets 布局也不同；
-需要依 RLinf 的載入／轉換方式檢查，不能只把模型 ID 填進 upstream serve_policy。
-模型檔大小不等於推論顯存，還需計入中間張量、KV cache 等記憶體。
-目前只查詢 metadata 與小型 norm_stats 檔，沒有下載權重。
+## 檔案與載入
+
+| 檔案 | 大小 | 推論需要？ |
+|---|---|---|
+| `model.safetensors` | 7,473,091,464 bytes | 是 |
+| `optimizer.pt` | 13,473,854,709 bytes | 否 |
+| `physical-intelligence/libero/norm_stats.json` | 小 | 是 |
+
+- 布局與 upstream OpenPI 不同
+	- 需依 RLinf 方式載入
+	- 不能只填進 `serve_policy`
+- 檔案大小 ≠ 推論顯存
+	- 另需中間張量
+	- 另需 KV cache
+- 只查過 metadata 與 `norm_stats`
+	- 沒下載權重
 
 ## 下一步
 
-目前可先測固定相機與實體關節狀態擷取。
-若要測這個 checkpoint，先在與它匹配的 LIBERO 流程中做不連接硬體的推論，
-確認模型格式及本機顯存是否可用。
-若目標是實體 WidowX 桌面操作，需要定義相容的控制介面、相機與末端座標、
-夾爪映射，並以實體示範資料驗證／微調；目前沒有證據支持直接零樣本部署。
+- 現在可做
+	- 測相機與關節擷取
+- 測這個 checkpoint
+	- 在 LIBERO 流程跑
+	- 不連接硬體
+	- 確認格式與顯存
+- 做實體桌面操作
+	- 定義相容控制介面
+	- 對齊相機與末端座標
+	- 定義夾爪映射
+	- 用實體示範驗證／微調
 
-來源：
+## 來源
 
 - [模型頁面](https://huggingface.co/RLinf/RLinf-Pi05-LIBERO-130-fullshot-SFT)
 - [模型檔案清單](https://huggingface.co/RLinf/RLinf-Pi05-LIBERO-130-fullshot-SFT/tree/main)

@@ -30,7 +30,7 @@
 # This script demonstrates how to move a robot to different positions.
 
 # Hardware setup:
-# 1. A WXAI V0 arm with leader end effector and ip at 192.168.1.2
+# 1. A WXAI V0 arm with follower end effector and ip at 192.168.1.2
 
 # The script does the following:
 # 1. Initializes the driver
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     print("Configuring the drivers...")
     driver.configure(
         trossen_arm.Model.wxai_v0,
-        trossen_arm.StandardEndEffector.wxai_v0_leader,
+        trossen_arm.StandardEndEffector.wxai_v0_follower,
         "192.168.1.2",
         False,
     )

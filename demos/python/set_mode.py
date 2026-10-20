@@ -30,11 +30,11 @@
 # This script demonstrates how to set the mode of the robot.
 
 # Hardware setup:
-# 1. A WXAI V0 arm with leader end effector and ip at 192.168.1.2
+# 1. A WXAI V0 arm with follower end effector and ip at 192.168.1.2
 
 # The script does the following:
 # 1. Initializes the driver
-# 2. Configures the driver with the leader configuration
+# 2. Configures the driver with the follower configuration
 # 3. Sets the gripper mode to "position"
 # 4. Sets the arm mode to "position"
 # 5. Sets the all mode to "idle"
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # Configure the driver
     driver.configure(
         trossen_arm.Model.wxai_v0,
-        trossen_arm.StandardEndEffector.wxai_v0_leader,
+        trossen_arm.StandardEndEffector.wxai_v0_follower,
         "192.168.1.2",
         False,
     )

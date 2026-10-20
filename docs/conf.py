@@ -120,8 +120,14 @@ html_theme_options = {
     'style_external_links': False,
 }
 
+# Size Mermaid diagrams to their content.
+mermaid_height = 'auto'
+
 # The name of an image file (relative to this directory) to place at the top of the sidebar.
 html_logo = "images/logo.png"
+
+# Pin MathJax 3.
+mathjax_path = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
 
 # Add any paths that contain custom static files (such as style sheets) here, relative to this
 # directory. They are copied after the builtin static files, so a file named "default.css" will

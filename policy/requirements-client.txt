@@ -1,0 +1,4 @@
+trossen-arm==1.11.0
+numpy>=1.26,<2
+pyrealsense2>=2.55
+opencv-python>=4.10,<4.12

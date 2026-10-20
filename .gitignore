@@ -4,3 +4,14 @@ _build/
 *venv/
 api/
 doxygen/
+policy/openpi/
+policy/captures/
+policy/lerobot_trossen/
+policy/lerobot_workspace/.venv/
+policy/lerobot_workspace/outputs/
+__pycache__/
+docker/runtime.env
+migration/
+checkpoints/
+*.pyc
+*.safetensors

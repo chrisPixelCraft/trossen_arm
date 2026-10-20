@@ -1,0 +1,9 @@
+# Recorded before in-place LeRobot setup, 2026-10-07.
+# Conda environment: /home/callinotch/miniconda3/envs/trossen_ai_env
+python==3.10.20
+numpy==2.2.6
+packaging==26.1
+pip==26.1.2
+setuptools==83.0.0
+trossen-arm==1.11.0
+wheel==0.47.0

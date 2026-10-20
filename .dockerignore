@@ -1,0 +1,19 @@
+# Only code and dependency metadata enter the build context.
+**
+!Dockerfile
+!.dockerignore
+!docker/
+!docker/requirements.lock
+!docker/verify.py
+!policy/
+!policy/lerobot_observe.py
+!policy/pi05_infer.py
+!policy/pi05_infer_cpu.py
+!policy/pi05_preflight.py
+!policy/test_lerobot_integration.py
+!demos/
+!demos/python/
+!demos/python/*.py
+**/__pycache__
+**/*.pyc
+**/.git

@@ -1,0 +1,9 @@
+# Install into the existing trossen_ai_env after upgrading it to Python 3.12.
+# Run from the trossen_arm project root. Use uv pip --torch-backend cu126.
+lerobot[pi,intelrealsense,core-scripts,training]==0.6.1
+-e ./policy/lerobot_trossen/packages/lerobot_robot_trossen
+trossen-arm==1.11.0
+torch==2.7.1
+torchvision==0.22.1
+torchcodec==0.3.0
+wheel==0.45.1

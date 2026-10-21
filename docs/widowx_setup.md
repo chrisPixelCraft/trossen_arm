@@ -208,4 +208,6 @@ rs-fw-update -r -f <韌體.bin>         # 修復 recovery mode 的相機
 - [trossen_arm Python 範例](https://github.com/TrossenRobotics/trossen_arm/tree/main/demos/python)
 - [Trossen 官方文件](https://docs.trossenrobotics.com/trossen_arm/main/)
 - [Software setup](https://docs.trossenrobotics.com/trossen_arm/main/getting_started/software_setup.html)
+- [zhl017 HackMD 安裝筆記](https://hackmd.io/@zhl017/widowx_ai)
+- [Trossen AI Getting Started Guide（YouTube）](https://www.youtube.com/watch?v=XoD0Zj9VfFk)
 - [librealsense Linux 安裝](https://github.com/realsenseai/librealsense/blob/master/doc/distribution_linux.md)

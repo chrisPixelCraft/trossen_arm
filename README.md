@@ -22,6 +22,7 @@ bash docker/run.sh observe
 
 | 文件 | 內容 |
 |---|---|
+| [docs/widowx_setup.md](docs/widowx_setup.md) | 手臂接線、燈號、安全、RealSense Linux 安裝 |
 | [docs/docker.md](docs/docker.md) | Docker 安裝、執行、搬移、故障排除 |
 | [policy/README_LEROBOT.md](policy/README_LEROBOT.md) | 主機 Conda 流程、資料契約、記憶體實測 |
 | [policy/CHECKPOINT_NOTES.md](policy/CHECKPOINT_NOTES.md) | RLinf LIBERO checkpoint 不相容原因 |
